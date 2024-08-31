@@ -1,109 +1,280 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نام اپلیکیشن شما</title>
-    <!-- Importing Vazir Font -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="Style/styles.css">
+    <title>Your Android App Landing Page</title>
+    <!-- Font for Farsi -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Light Mode */
+        :root {
+            --primary-color: #008DCD;
+            --primary-dark-color: #0084C2;
+            --bg-color: #f5f5f5;
+            --text-color: #333;
+            --header-bg: linear-gradient(135deg, #008DCD, #00aaff);
+            --section-bg: linear-gradient(135deg, #ffffff, #f0f0f0);
+            --carousel-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --header-bg: linear-gradient(135deg, #005b99, #003f7f);
+            --section-bg: linear-gradient(135deg, #1e1e1e, #121212);
+            --carousel-bg: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--header-bg);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .header .language-toggle,
+        .header .mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .header .language-toggle select,
+        .header .mode-toggle button {
+            background: var(--primary-color);
+            border: none;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .header .language-toggle select:hover,
+        .header .mode-toggle button:hover {
+            background-color: var(--primary-dark-color);
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--section-bg);
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h1 {
+            margin-bottom: 20px;
+            font-size: 36px;
+            line-height: 1.2;
+        }
+
+        .main-content p {
+            margin-bottom: 30px;
+            font-size: 18px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: var(--primary-dark-color);
+        }
+
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 20px;
+            gap: 10px;
+            background: var(--carousel-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px; /* Added margin-top */
+        }
+
+        .carousel img {
+            scroll-snap-align: center;
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-bottom: 30px; /* Added margin-bottom */
+        }
+
+        .download-btn:hover {
+            background-color: var(--primary-dark-color);
+        }
+
+        .download-btn i {
+            margin-right: 10px;
+        }
+
+        .app-info {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .app-info div {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .app-info div span {
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .carousel img {
+                width: 250px;
+            }
+
+            .main-content h1 {
+                font-size: 28px;
+            }
+
+            .button, .download-btn {
+                font-size: 16px;
+                padding: 12px 24px;
+            }
+
+            .header .language-toggle,
+            .header .mode-toggle {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Modal for Telegram Invitation -->
-    <div id="telegram-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>به کانال تلگرام ما بپیوندید!</h2>
-            <p>برای دریافت آخرین به‌روزرسانی‌ها و اخبار اپلیکیشن، به کانال تلگرام ما بپیوندید.</p>
-            <a href="https://t.me/yourchannel" class="telegram-button">عضویت در تلگرام</a>
-        </div>
-    </div>
 
-    <!-- Header Section -->
     <header class="header">
-        <div class="container">
-            <h1>نام اپلیکیشن شما</h1>
-            <p>شعار کوتاه و جذاب برای اپلیکیشن شما.</p>
-            <a href="https://play.google.com/store/apps/details?id=yourappid" class="download-button">دانلود از گوگل پلی</a>
+        <h1>Your App</h1>
+        <div class="language-toggle">
+            <select class="language-spinner" onchange="switchLanguage(this.value)">
+                <option value="fa" selected>فارسی</option>
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+            </select>
+        </div>
+        <div class="mode-toggle">
+            <button onclick="toggleTheme()">🌙</button>
         </div>
     </header>
 
-    <!-- Introduction Section -->
-    <section class="intro">
-        <div class="container">
-            <h2>خوش آمدید به اپلیکیشن ما!</h2>
-            <p>در اینجا می‌توانید توضیح مختصری درباره اپلیکیشن خود ارائه دهید و نکات اصلی و مزایای آن را برجسته کنید.</p>
-        </div>
-    </section>
+    <div class="main-content">
+        <h1 lang="en">Welcome to Our App!</h1>
+        <h1 lang="fa">به اپلیکیشن ما خوش آمدید!</h1>
+        <h1 lang="ru" style="display: none;">Добро пожаловать в наше приложение!</h1>
 
-    <!-- Screenshots Section -->
-    <section class="screenshots">
-        <div class="container">
-            <h2>تصاویر اپلیکیشن</h2>
-            <div class="screenshots-container">
-                <img src="https://s8.uupload.ir/files/screenshot_2024-08-29-00-59-36-003_ir.sina.sketchbox_vxdx.jpg" alt="تصویر 1">
-                <img src="https://s8.uupload.ir/files/screenshot_2024-08-29-00-59-36-003_ir.sina.sketchbox_vxdx.jpg" alt="تصویر 2">
-                <img src="https://s8.uupload.ir/files/screenshot_2024-08-29-00-59-36-003_ir.sina.sketchbox_vxdx.jpg" alt="تصویر 3">
-            </div>
-        </div>
-    </section>
+        <p lang="en">Share your Android Studio projects with the world!</p>
+        <p lang="fa">پروژه های اندروید استودیو خود را با جهان به اشتراک بگذارید!</p>
+        <p lang="ru" style="display: none;">Делитесь своими проектами Android Studio с миром!</p>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <h2>ویژگی‌ها</h2>
-            <div class="feature">
-                <img src="feature-icon1.png" alt="آیکون ویژگی 1">
-                <h3>ویژگی اول</h3>
-                <p>توضیح مختصر درباره ویژگی اول.</p>
-            </div>
-            <div class="feature">
-                <img src="feature-icon2.png" alt="آیکون ویژگی 2">
-                <h3>ویژگی دوم</h3>
-                <p>توضیح مختصر درباره ویژگی دوم.</p>
-            </div>
-            <!-- Add more features as needed -->
-        </div>
-    </section>
+        <a href="#download" class="download-btn">
+            <i class="fas fa-download"></i> Download Now
+        </a>
 
-    <!-- Call to Action Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>همین حالا اپلیکیشن خود را دریافت کنید!</h2>
-            <a href="https://play.google.com/store/apps/details?id=yourappid" class="download-button">دانلود از گوگل پلی</a>
+        <div class="app-info">
+            <div><span>Version:</span> 1.0.0</div>
+            <div><span>Minimum Android Version:</span> 5.0 (Lollipop)</div>
+            <div><span>App Size:</span> 15 MB</div>
+            <div><span>Published Date:</span> September 1, 2024</div>
         </div>
-    </section>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-        <div class="container">
-            <p>تماس با ما: <a href="mailto:support@yourapp.com">support@yourapp.com</a></p>
-            <p><a href="#">سیاست حفظ حریم خصوصی</a> | <a href="#">شرایط استفاده</a></p>
+        <div class="carousel">
+            <img src="https://via.placeholder.com/300x200?text=Screenshot+1" alt="Screenshot 1">
+            <img src="https://via.placeholder.com/300x200?text=Screenshot+2" alt="Screenshot 2">
+            <img src="https://via.placeholder.com/300x200?text=Screenshot+3" alt="Screenshot 3">
+            <!-- Add more screenshots as needed -->
         </div>
-    </footer>
+    </div>
 
-    <!-- JavaScript to handle modal display -->
     <script>
-        // Get modal element
-        var modal = document.getElementById("telegram-modal");
-        var closeButton = document.querySelector(".close-button");
+        // Function to switch languages
+        function switchLanguage(lang) {
+            document.querySelectorAll('[lang]').forEach(function (el) {
+                if (el.getAttribute('lang') === lang) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+        }
 
-        // Show modal on page load
-        window.onload = function() {
-            modal.style.display = "block";
-        };
-
-        // Close the modal when the user clicks the close button
-        closeButton.onclick = function() {
-            modal.style.display = "none";
-        };
-
-        // Close the modal when the user clicks outside of the modal content
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+        // Function to toggle between light and dark mode
+        function toggleTheme() {
+            const isDarkMode = document.body.hasAttribute('data-theme') && document.body.getAttribute('data-theme') === 'dark';
+            if (isDarkMode) {
+                document.body.removeAttribute('data-theme');
+                document.querySelector('.mode-toggle button').textContent = '🌙';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                document.querySelector('.mode-toggle button').textContent = '🌞';
             }
-        };
+        }
     </script>
+
 </body>
 </html>
