@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #ffffff;
+            }
+            .card {
+                background-color: #1e1e1e;
+                color: #ffffff;
+            }
+        }
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            .card {
+                background-color: #ffffff;
+                color: #000000;
+            }
+        }
+        .card {
+            margin: 5px 0; /* Vertical margin only */
+            width: 100%; /* Match parent width */
+        }
+        .container {
+            padding-left: 0; /* Remove left padding */
+            padding-right: 0; /* Remove right padding */
+        }
+        .btn-full {
+            width: 100%;
+            border-radius: 25px; /* Full rounded */
+            background-color: #2196F3; /* Custom blue color */
+            color: #ffffff; /* Text color */
+        }
+        .btn-full:hover {
+            background-color: #1976D2; /* Darker shade on hover */
+        }
+    </style>
+    <title>News Page</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row" id="newsContainer" style="margin: 0;"> <!-- Remove row margin -->
+        </div>
+    </div>
+
+    <script>
+        const newsData = [
+            {
+                "Title": "خبر اول",
+                "Description": "این اولین خبر است.",
+                "Poster": "https://via.placeholder.com/150",
+                "Button": "کلیک کن",
+                "Link": "https://example.com/news1"
+            },
+            {
+                "Title": "خبر دوم",
+                "Description": "این دومین خبر است.",
+                "Poster": null,
+                "Button": null,
+                "Link": null
+            },
+            {
+                "Title": "خبر سوم",
+                "Description": "این سومین خبر است.",
+                "Poster": "https://via.placeholder.com/150",
+                "Button": "کلیک کن",
+                "Link": "https://example.com/news3"
+            }
+        ];
+
+        const container = document.getElementById('newsContainer');
+
+        newsData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'col s12'; // Full width column
+            card.innerHTML = `
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">${item.Title}</span>
+                        <p>${item.Description}</p>
+                        ${item.Poster ? `<img src="${item.Poster}" alt="Poster" class="responsive-img">` : ''}
+                    </div>
+                    <div class="card-action">
+                        ${item.Button && item.Link ? `<a href="${item.Link}" class="btn btn-full" target="_blank">${item.Button}</a>` : ''}
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
